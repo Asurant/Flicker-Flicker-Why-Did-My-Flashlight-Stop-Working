@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://ddpddbd1cwfbd"]
+
+[ext_resource type="Script" uid="uid://dptitum51in63" path="res://Scripts/Player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://duwbcm5ki6fxc" path="res://Sprites/flashlight.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://chhw72yeekrm1" path="res://Sprites/player.png" id="2_qhqgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
+size = Vector2(66, 66)
+
+[sub_resource type="Gradient" id="Gradient_g2els"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qhqgy"]
+gradient = SubResource("Gradient_g2els")
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1607438005]
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2105921733]
+shape = SubResource("RectangleShape2D_u8vuu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131447046]
+scale = Vector2(4, 4)
+texture = ExtResource("2_qhqgy")
+
+[node name="Flashlight" type="PointLight2D" parent="." unique_id=945801764]
+position = Vector2(59.735184, 1.3994067e-07)
+rotation = 4.712389
+scale = Vector2(1, 1.733449)
+shadow_enabled = true
+texture = ExtResource("2_g2els")
+offset = Vector2(0, 64)
+texture_scale = 1.25
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=809398224]
+rotation = -1.5707964
+texture = SubResource("GradientTexture2D_qhqgy")
+
+[node name="Timer" type="Timer" parent="." unique_id=1754173293]
+wait_time = 0.001
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=796105596]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

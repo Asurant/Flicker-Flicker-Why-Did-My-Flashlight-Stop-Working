@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dfp60dvsvcis"]
+
+[ext_resource type="Script" uid="uid://qqmmwphtjfwi" path="res://Scripts/coin.gd" id="1_rwqht"]
+[ext_resource type="Texture2D" uid="uid://5b0cvewiy5r8" path="res://Sprites/coin.png" id="2_i64fm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d14el"]
+radius = 20.0
+height = 50.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i64fm"]
+cull_mode = 2
+polygon = PackedVector2Array(0.01329487, -24.999996, 6.012762, -23.996805, 16.007975, -14.991489, 15.992022, 15.008507, 4.9872365, 24.002655, -0.01329487, 24.999996, -5.0127625, 23.997337, -16.007975, 14.991489, -15.992022, -15.008507, -5.987236, -24.003187)
+
+[node name="Coin" type="Node2D" unique_id=1260931275]
+script = ExtResource("1_rwqht")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1166436983]
+position = Vector2(0, -7.1525574e-07)
+scale = Vector2(2.46, 3.075)
+texture = ExtResource("2_i64fm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1298085759]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1187966145]
+shape = SubResource("CapsuleShape2D_d14el")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=532394255]
+rotation = -0.0005317948
+occluder = SubResource("OccluderPolygon2D_i64fm")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
